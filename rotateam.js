@@ -1,17 +1,18 @@
+Teams = new Meteor.Collection("teams");
+Members = new Meteor.Collection("members");
 
 
 if (Meteor.isClient) {
-  Template.hello.greeting = function () {
-    return "Welcome to rotateam.";
-  };
 
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
-  });
+    Template.nav.groups = function () {
+        return Teams.find();
+    };
+    Template.nav.events({
+        'click #add-group': function () {
+            console.log("Clicked the add-group button");
+        }
+    });
+
 }
 
 if (Meteor.isServer) {
