@@ -8,3 +8,11 @@ insecure
 preserve-inputs
 bootstrap
 jquery
+accounts-base
+accounts-github
+accounts-google
+accounts-twitter
+accounts-ui
+underscore
+backbone
+less
