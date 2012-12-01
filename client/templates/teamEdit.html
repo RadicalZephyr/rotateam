@@ -1,8 +1,10 @@
 <template name="teamEdit">
+  {{#with group}}
   <form>
     <label for="window">Number of active team members</label>
     <input type="number" name="window" value="{{window}}">
     <label for="period">Period</label>
     <input type="text" name="period" value="{{period}}">
   </form>
+  {{/with}}
 </template>
