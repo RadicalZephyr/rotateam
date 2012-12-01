@@ -2,19 +2,6 @@ Teams = new Meteor.Collection("teams");
 Members = new Meteor.Collection("members");
 AddForm = null;
 
-// Handlebars.registerHelper('each', function(context, options) {
-//     var ret = "";
-
-//     if (context) {
-//         for(var i=0, j=context.length; i<j; i++) {
-//             ret = ret + options.fn(context[i]);
-//         }
-//     } else {
-//         ret = options.inverse(this);
-//     }
-//     return ret;
-// });
-
 if (Meteor.isClient) {
 
     Template.nav.groups = function () {
@@ -89,6 +76,21 @@ if (Meteor.isClient) {
     Template.body.members = function () {
         return Members.find({'group': Session.get("currentGroup")});
     };
+    Template.body.events({
+        'click a': function () {
+            event.stopImmediatePropagation();
+            console.log("Clicked the add-member button");
+            Session.set("modal", {"title": "Add a Team Member",
+                                  "type": "Member"});
+            AddForm.show(function(err, value) {
+                if (!err) {
+                    Members.insert({"name": value,
+                                    "userId": undefined,
+                                    "group": Session.get("currentGroup")});
+                }
+            });
+        }
+    });
 }
 
 if (Meteor.isServer) {
