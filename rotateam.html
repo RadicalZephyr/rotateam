@@ -32,9 +32,17 @@
 </template>
 
 <template name="body">
-{{#each members}}
-<h3>{{name}}</h3>
-{{/each}}
+  {{#if selected}}
+  {{#each members}}
+  <h3>{{name}}</h3>
+  {{else}}
+  <h2>{{groupname}} has no members!</h2>
+  {{/each}}
+  <a class="btn" id="add-member">
+    <i class="icon-plus"></i>
+    Add a Member
+  </a>
+  {{/if}}
 </template>
 
 <template name="addForm">

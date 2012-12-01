@@ -2,6 +2,19 @@ Teams = new Meteor.Collection("teams");
 Members = new Meteor.Collection("members");
 AddForm = null;
 
+// Handlebars.registerHelper('each', function(context, options) {
+//     var ret = "";
+
+//     if (context) {
+//         for(var i=0, j=context.length; i<j; i++) {
+//             ret = ret + options.fn(context[i]);
+//         }
+//     } else {
+//         ret = options.inverse(this);
+//     }
+//     return ret;
+// });
+
 if (Meteor.isClient) {
 
     Template.nav.groups = function () {
@@ -63,12 +76,17 @@ if (Meteor.isClient) {
             });
             dlg.modal('show');
         };
-        console.log(this);
         AddForm = this;
         console.log("Setting Session.addForm");
     };
 
-    Template.body.members = function() {
+    Template.body.selected = function () {
+        return Session.get("currentGroup") !== undefined;
+    };
+    Template.body.groupname = function () {
+        return Session.get("currentGroup");
+    };
+    Template.body.members = function () {
         return Members.find({'group': Session.get("currentGroup")});
     };
 }
