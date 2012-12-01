@@ -43,17 +43,19 @@
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal"
               aria-hidden="true">x</button>
+      {{#isolate}}
       <h3 id="addFormLabel">{{title}}</h3>
+      {{/isolate}}
     </div>
     <div class="modal-body">
-      <form id="add-form">
-        <input type="text" name="groupname" />
-        <button type="button">Add</button>
-      </form>
+      <label for="name">Group Name</label>
+      <input id="nameInput" type="text" name="name" />
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal"
               aria-hidden="true">Close</button>
-      <button class="btn btn-primary">Add {{type}}</button>
+      {{#isolate}}
+      <button id="add" class="btn btn-primary">Add {{type}}</button>
+      {{/isolate}}
     </div>
 </template>

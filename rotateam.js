@@ -11,10 +11,15 @@ if (Meteor.isClient) {
     };
     Template.nav.events({
         'click #add-group': function (event) {
+            event.stopImmediatePropagation();
             console.log("Clicked the add-group button");
             Session.set("modal", {"title": "Add a Group",
                                   "type": "Group"});
-            $('#modalAddForm').modal();
+            var addForm = Session.get("addForm");
+            addForm._show(function(err, value) {
+                if (!err)
+                    console.log("Trying to add \""+value+"\".");
+            });
         },
         'click a': function (event) {
             console.log("Show group "+this.name);
@@ -35,20 +40,28 @@ if (Meteor.isClient) {
         else return '';
     };
     Template.addForm.events({
-        'click #add-form button': function (event) {
-            var groupName = $('#add-form')[0].elements["groupname"].value;
-            console.log("Added a group "+groupName+"!");
-            Teams.insert({'name': groupName,
-                          'index': 0,
-                          'members': [],
-                          'period': ""},
-                         function (err, id) {
-                             if (err) {
-                                 console.warn("Unable to create group with name: "+groupName);
-                             }
-                         });
+        'click #add ': function (event, template) {
+            name = template.find("#nameInput").value;
+            console.log("Entered value to add \""+name+"\"!");
+            dlg = $("#modalAddForm");
+            dlg.on('hide', function () {
+                template.callback(false, name);
+            });
+            dlg.modal('hide');
         }
     });
+    Template.addForm.created = function () {
+        this._show = function(callback) {
+            this.callback = callback;
+            dlg = $("#modalAddForm");
+            dlg.on('hide', function () {
+                callback(true, '');
+            });
+            dlg.modal('show');
+        };
+        Session.set("addForm", this);
+        console.log("Setting Session.addForm");
+    };
 
     Template.body.members = function() {
         return Members.find({'group': Session.get("currentGroup")});
