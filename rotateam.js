@@ -1,42 +1,38 @@
 Teams = new Meteor.Collection("teams");
 Members = new Meteor.Collection("members");
 
-currentGroup = '';
-
 if (Meteor.isClient) {
 
     Template.nav.groups = function () {
         return Teams.find();
+    };
+    Template.nav.isActive = function (group) {
+        return group === Session.get("currentGroup");
     };
     Template.nav.events({
         'click #add-group': function (event) {
             console.log("Clicked the add-group button");
             Session.set("modal", {"title": "Add a Group",
                                   "type": "Group"});
-            console.log($('#modalAddForm').modal());
+            $('#modalAddForm').modal();
         },
         'click a': function (event) {
             console.log("Show group "+this.name);
             if (this.name) {
-                currentGroup = this.name;
-                console.log(currentGroup);
+                Session.set("currentGroup", this.name);
             }
         }
     });
 
     Template.addForm.title = function () {
         var modal = Session.get("modal");
-        if (modal)
-            return modal.title;
-        else
-            return '';
+        if (modal) return modal.title;
+        else return '';
     };
     Template.addForm.type = function () {
         var modal = Session.get("modal");
-        if (modal)
-            return modal.type;
-        else
-            return '';
+        if (modal) return modal.type;
+        else return '';
     };
     Template.addForm.events({
         'click #add-form button': function (event) {
@@ -55,7 +51,7 @@ if (Meteor.isClient) {
     });
 
     Template.body.members = function() {
-        return Members.find({'group': currentGroup});
+        return Members.find({'group': Session.get("currentGroup")});
     };
 }
 
