@@ -21,7 +21,12 @@
   {{#each groups}}
     <li><a>{{name}}</a></li>
   {{/each}}
-  <li><a id="add-group"><i class="icon-plus"></i> Add a Group</a></li>
+  <li>
+    <a id="add-group">
+      <i class="icon-plus"></i>
+      Add a Group
+    </a>
+  </li>
 </ul>
 </template>
 
@@ -32,8 +37,22 @@
 </template>
 
 <template name="addForm">
-<form id="add-form">
-  <input type="text" name="groupname" />
-  <button type="button">Add</button>
-</form>
+  <div id="{{id}}" class="modal hide fade"
+       role="dialog" aria-labeledby="addFormLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"
+              aria-hidden="true">x</button>
+      <h3 id="addFormLabel">{{title}}</h3>
+    </div>
+    <div class="modal-body">
+      <form id="add-form">
+        <input type="text" name="groupname" />
+        <button type="button">Add</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal"
+              aria-hidden="true">Close</button>
+      <button class="btn btn-primary">Add {{type}}</button>
+    </div>
 </template>

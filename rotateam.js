@@ -12,6 +12,10 @@ if (Meteor.isClient) {
     Template.nav.events({
         'click #add-group': function (event) {
             console.log("Clicked the add-group button");
+            Template.addForm({"id": "addGroupModal",
+                              "title": "Add a Group",
+                              "type": "Group"});
+            console.log($('#addGroupModal').modal({'show': true}));
         },
         'click a': function (event) {
             console.log("Show group "+this.name);
