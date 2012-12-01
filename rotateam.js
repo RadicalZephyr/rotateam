@@ -1,5 +1,6 @@
 Teams = new Meteor.Collection("teams");
 Members = new Meteor.Collection("members");
+AddForm = null;
 
 if (Meteor.isClient) {
 
@@ -15,10 +16,13 @@ if (Meteor.isClient) {
             console.log("Clicked the add-group button");
             Session.set("modal", {"title": "Add a Group",
                                   "type": "Group"});
-            var addForm = Session.get("addForm");
-            addForm._show(function(err, value) {
-                if (!err)
-                    console.log("Trying to add \""+value+"\".");
+            AddForm.show(function(err, value) {
+                if (!err) {
+                    Teams.insert({"name": value,
+                                  "period": "1d",
+                                  "index": 0,
+                                  "members": []});
+                }
             });
         },
         'click a': function (event) {
@@ -51,7 +55,7 @@ if (Meteor.isClient) {
         }
     });
     Template.addForm.created = function () {
-        this._show = function(callback) {
+        this.show = function(callback) {
             this.callback = callback;
             dlg = $("#modalAddForm");
             dlg.on('hide', function () {
@@ -59,7 +63,8 @@ if (Meteor.isClient) {
             });
             dlg.modal('show');
         };
-        Session.set("addForm", this);
+        console.log(this);
+        AddForm = this;
         console.log("Setting Session.addForm");
     };
 
