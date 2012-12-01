@@ -3,7 +3,7 @@ Template.teamList.groups = function () {
 };
 
 Template.teamList.isActive = function (group) {
-    return group === Session.get("currentGroup");
+    return Session.equals("currentGroup", group);
 };
 
 Template.teamList.events({
@@ -18,15 +18,19 @@ Template.teamList.events({
                               "period": "1d",
                               "window": 2,
                               "index": 0,
-                              "members": []});
-                Session.set("currentGroup", value);
+                              "members": []},
+                             function (err, result) {
+                                 console.log("Insert callback, err: \""+err+"\", result: \""+result+"\"");
+                                 if (!err)
+                                     Session.set("currentGroup", result);
+                             });
             }
         });
     },
     'click a': function (event) {
         console.log("Show group "+this.name);
-        if (this.name) {
-            Session.set("currentGroup", this.name);
+        if (this._id) {
+            Session.set("currentGroup", this._id);
         }
     }
 });

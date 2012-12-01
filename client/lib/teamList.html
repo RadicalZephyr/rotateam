@@ -1,7 +1,7 @@
 <template name="teamList">
 <ul class="nav nav-pills nav-stacked">
   {{#each groups}}
-    <li {{#if isActive name}}class="active"{{/if}}><a>{{name}}</a></li>
+    <li {{#if isActive _id}}class="active"{{/if}}><a>{{name}}</a></li>
   {{/each}}
   <li>
     <a id="add-group">

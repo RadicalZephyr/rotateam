@@ -3,11 +3,11 @@ Template.teamView.selected = function () {
 };
 
 Template.teamView.groupname = function () {
-    return Session.get("currentGroup");
+    return Teams.findOne({'_id': Session.get("currentGroup")});
 };
 
 Template.teamView.members = function () {
-    return Members.find({'group': Session.get("currentGroup")});
+    return Members.find({'team': Session.get("currentGroup")});
 };
 
 Template.teamView.events({
@@ -20,7 +20,7 @@ Template.teamView.events({
             if (!err) {
                 Members.insert({"name": value,
                                 "userId": undefined,
-                                "group": Session.get("currentGroup")});
+                                "team": Session.get("currentGroup")});
             }
         });
     }
