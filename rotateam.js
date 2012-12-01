@@ -44,14 +44,20 @@ if (Meteor.isClient) {
         if (modal) return modal.type;
         else return '';
     };
+    function addName(event, template) {
+        name = template.find("#nameInput").value;
+        console.log("Entered value to add \""+name+"\"!");
+        dlg = $("#modalAddForm");
+        template.error = false;
+        template.value = name;
+        dlg.modal('hide');
+    };
     Template.addForm.events({
-        'click #add ': function (event, template) {
-            name = template.find("#nameInput").value;
-            console.log("Entered value to add \""+name+"\"!");
-            dlg = $("#modalAddForm");
-            template.error = false;
-            template.value = name;
-            dlg.modal('hide');
+        'click #add ': addName,
+        'keypress': function (event, template) {
+            if (event.which === 13) {
+                addName(event, template);
+            }
         }
     });
     Template.addForm.created = function () {
