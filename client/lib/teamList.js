@@ -1,12 +1,12 @@
-Template.nav.groups = function () {
+Template.teamList.groups = function () {
     return Teams.find();
 };
 
-Template.nav.isActive = function (group) {
+Template.teamList.isActive = function (group) {
     return group === Session.get("currentGroup");
 };
 
-Template.nav.events({
+Template.teamList.events({
     'click #add-group': function (event) {
         event.stopImmediatePropagation();
         console.log("Clicked the add-group button");
