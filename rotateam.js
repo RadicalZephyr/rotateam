@@ -48,24 +48,38 @@ if (Meteor.isClient) {
             name = template.find("#nameInput").value;
             console.log("Entered value to add \""+name+"\"!");
             dlg = $("#modalAddForm");
-            dlg.on('hide', function () {
-                template.callback(false, name);
-            });
+            template.error = false;
+            template.value = name;
             dlg.modal('hide');
         }
     });
     Template.addForm.created = function () {
+        this.callbackInit = false;
+        this.error = true;
+        this.value = '';
         this.show = function(callback) {
             this.callback = callback;
-            dlg = $("#modalAddForm");
-            dlg.on('hide', function () {
-                callback(true, '');
-            });
-            dlg.modal('show');
+            this.error = true;
+            this.value = '';
+            var input = this.find("#nameInput");
+            input.value = '';
+            input.focus();
+            $("#modalAddForm").modal('show');;
         };
         AddForm = this;
         console.log("Setting Session.addForm");
     };
+    Template.addForm.rendered = function () {
+        if (!this.callbackInit) {
+            var target = this;
+            this.callbackInit = true;
+            var dlg = $("#modalAddForm");
+            dlg.on('hide', function () {
+                console.log("Calling callback with error: "+target.error+", value: "+target.value);
+                target.callback(target.error, target.value);
+            });
+        }
+    }
 
     Template.body.selected = function () {
         return Session.get("currentGroup") !== undefined;
