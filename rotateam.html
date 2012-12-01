@@ -26,11 +26,13 @@
 </template>
 
 <template name="body">
-{{> addGroup}}
+{{#each members}}
+<h3>{{name}}</h3>
+{{/each}}
 </template>
 
-<template name="addGroup">
-<form id="add-group-form">
+<template name="addForm">
+<form id="add-form">
   <input type="text" name="groupname" />
   <button type="button">Add</button>
 </form>
