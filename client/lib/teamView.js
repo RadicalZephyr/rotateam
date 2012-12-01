@@ -1,16 +1,16 @@
-Template.body.selected = function () {
+Template.teamView.selected = function () {
     return ! Session.equals("currentGroup", undefined);
 };
 
-Template.body.groupname = function () {
+Template.teamView.groupname = function () {
     return Session.get("currentGroup");
 };
 
-Template.body.members = function () {
+Template.teamView.members = function () {
     return Members.find({'group': Session.get("currentGroup")});
 };
 
-Template.body.events({
+Template.teamView.events({
     'click a': function () {
         event.stopImmediatePropagation();
         console.log("Clicked the add-member button");
