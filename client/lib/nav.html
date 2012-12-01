@@ -1,0 +1,13 @@
+<template name="nav">
+<ul class="nav nav-pills nav-stacked">
+  {{#each groups}}
+    <li {{#if isActive name}}class="active"{{/if}}><a>{{name}}</a></li>
+  {{/each}}
+  <li>
+    <a id="add-group">
+      <i class="icon-plus"></i>
+      Add a Group
+    </a>
+  </li>
+</ul>
+</template>
