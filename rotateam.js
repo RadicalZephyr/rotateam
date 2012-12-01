@@ -17,7 +17,7 @@ if (Meteor.isClient) {
             Session.set("modal", {"title": "Add a Group",
                                   "type": "Group"});
             AddForm.show(function(err, value) {
-                if (!err) {
+                if (!err && value !== undefined) {
                     Teams.insert({"name": value,
                                   "period": "1d",
                                   "index": 0,
@@ -61,9 +61,7 @@ if (Meteor.isClient) {
             this.callback = callback;
             this.error = true;
             this.value = '';
-            var input = this.find("#nameInput");
-            input.value = '';
-            input.focus();
+            this.nameInput.value = '';
             $("#modalAddForm").modal('show');;
         };
         AddForm = this;
@@ -71,6 +69,7 @@ if (Meteor.isClient) {
     };
     Template.addForm.rendered = function () {
         if (!this.callbackInit) {
+            this.nameInput = this.find("#nameInput");
             var target = this;
             this.callbackInit = true;
             var dlg = $("#modalAddForm");
@@ -78,11 +77,14 @@ if (Meteor.isClient) {
                 console.log("Calling callback with error: "+target.error+", value: "+target.value);
                 target.callback(target.error, target.value);
             });
+            dlg.on('shown', function () {
+                target.nameInput.focus();
+            });
         }
     }
 
     Template.body.selected = function () {
-        return Session.get("currentGroup") !== undefined;
+        return ! Session.equals("currentGroup", undefined);
     };
     Template.body.groupname = function () {
         return Session.get("currentGroup");
