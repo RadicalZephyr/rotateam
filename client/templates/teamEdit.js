@@ -1,0 +1,1 @@
+Template.teamEdit.group = getCurrentGroup;
