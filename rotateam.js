@@ -8,14 +8,12 @@ if (Meteor.isClient) {
     Template.nav.groups = function () {
         return Teams.find();
     };
-
     Template.nav.events({
         'click #add-group': function (event) {
             console.log("Clicked the add-group button");
-            Template.addForm({"id": "addGroupModal",
-                              "title": "Add a Group",
-                              "type": "Group"});
-            console.log($('#addGroupModal').modal({'show': true}));
+            Session.set("modal", {"title": "Add a Group",
+                                  "type": "Group"});
+            console.log($('#modalAddForm').modal());
         },
         'click a': function (event) {
             console.log("Show group "+this.name);
@@ -26,6 +24,20 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.addForm.title = function () {
+        var modal = Session.get("modal");
+        if (modal)
+            return modal.title;
+        else
+            return '';
+    };
+    Template.addForm.type = function () {
+        var modal = Session.get("modal");
+        if (modal)
+            return modal.type;
+        else
+            return '';
+    };
     Template.addForm.events({
         'click #add-form button': function (event) {
             var groupName = $('#add-form')[0].elements["groupname"].value;

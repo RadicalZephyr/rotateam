@@ -10,6 +10,7 @@
       <div class="span10">{{> body}}</div>
     </div>
   </div>
+{{> addForm}}
 </body>
 
 <template name="banner">
@@ -37,7 +38,7 @@
 </template>
 
 <template name="addForm">
-  <div id="{{id}}" class="modal hide fade"
+  <div id="modalAddForm" class="modal hide fade"
        role="dialog" aria-labeledby="addFormLabel" aria-hidden="true">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal"
