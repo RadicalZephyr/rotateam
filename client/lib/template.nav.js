@@ -19,6 +19,7 @@ Template.nav.events({
                               "window": 2,
                               "index": 0,
                               "members": []});
+                Session.set("currentGroup", value);
             }
         });
     },

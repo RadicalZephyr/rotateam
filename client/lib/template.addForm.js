@@ -49,7 +49,7 @@ Template.addForm.rendered = function () {
         var target = this;
         this.callbackInit = true;
         var dlg = $("#modalAddForm");
-        dlg.on('hide', function () {
+        dlg.on('hidden', function () {
             console.log("Calling callback with error: "+target.error+", value: "+target.value);
             target.callback(target.error, target.value);
         });
