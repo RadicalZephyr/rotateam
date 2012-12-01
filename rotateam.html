@@ -19,11 +19,19 @@
 <template name="nav">
 <ul class="nav nav-pills nav-stacked">
   {{#each groups}}
-    <li><a href="#{{name}}">{{name}}</a></li>
+    <li><a>{{name}}</a></li>
   {{/each}}
-  <li><a id="add-group" href="#"><i class="icon-plus"></i> Add a Group</a></li>
+  <li><a id="add-group"><i class="icon-plus"></i> Add a Group</a></li>
 </ul>
 </template>
 
 <template name="body">
+{{> addGroup}}
+</template>
+
+<template name="addGroup">
+<form id="add-group-form">
+  <input type="text" name="groupname" />
+  <button type="button">Add</button>
+</form>
 </template>
