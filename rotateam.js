@@ -20,6 +20,7 @@ if (Meteor.isClient) {
                 if (!err && value !== undefined) {
                     Teams.insert({"name": value,
                                   "period": "1d",
+                                  "window": 2,
                                   "index": 0,
                                   "members": []});
                 }
