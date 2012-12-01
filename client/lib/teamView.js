@@ -2,7 +2,7 @@ Template.teamView.selected = function () {
     return ! Session.equals("currentGroup", undefined);
 };
 
-Template.teamView.groupname = function () {
+Template.teamView.group = function () {
     return Teams.findOne({'_id': Session.get("currentGroup")});
 };
 
