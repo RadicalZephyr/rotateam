@@ -40,7 +40,7 @@ Template.addForm.created = function () {
         $("#modalAddForm").modal('show');;
     };
     AddForm = this;
-    console.log("Setting Session.addForm");
+    console.log("Setting AddForm");
 };
 
 Template.addForm.rendered = function () {

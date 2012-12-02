@@ -16,7 +16,11 @@ Template.teamView.events({
                               "type": "Member"});
         AddForm.show(function(err, value) {
             if (!err) {
-                addMember({"name": value});
+                addMember({"name": value,
+                           "team": Session.get("currentTeam")},
+                          function (err, value) {
+                              console.log("Successfully added member \""+value+"\"");
+                          });
             }
         });
     }
