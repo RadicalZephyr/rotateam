@@ -2,7 +2,7 @@ Template.teamView.selected = function () {
     return ! Session.equals("currentGroup", undefined);
 };
 
-Template.teamView.group = getCurrentGroup();
+Template.teamView.group = getCurrentGroup;
 
 Template.teamView.members = function () {
     return Members.find({'team': Session.get("currentGroup")});
