@@ -14,16 +14,13 @@ Template.teamList.events({
                               "type": "Group"});
         AddForm.show(function(err, value) {
             if (!err && value !== undefined) {
-                Teams.insert({"name": value,
-                              "period": "1d",
-                              "window": 2,
-                              "index": 0,
-                              "members": []},
-                             function (err, result) {
-                                 console.log("Insert callback, err: \""+err+"\", result: \""+result+"\"");
-                                 if (!err)
-                                     Session.set("currentGroup", result);
-                             });
+                addTeam({"name": value,
+                          "callback": function (err, result) {
+                              console.log("Insert callback, err: \""+err+"\", result: \""+result+"\"");
+                              if (!err)
+                                  Session.set("currentGroup", result);
+                          }
+                         });
             }
         });
     },
