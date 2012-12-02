@@ -17,10 +17,7 @@ Template.teamView.events({
         AddForm.show(function(err, value) {
             if (!err) {
                 addMember({"name": value,
-                           "team": Session.get("currentTeam")},
-                          function (err, value) {
-                              console.log("Successfully added member \""+value+"\"");
-                          });
+                           "team": Session.get("currentTeam")});
             }
         });
     }
