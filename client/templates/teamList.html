@@ -1,12 +1,12 @@
 <template name="teamList">
 <ul class="nav nav-pills nav-stacked">
-  {{#each groups}}
+  {{#each teams}}
     <li {{#if isActive _id}}class="active"{{/if}}><a>{{name}}</a></li>
   {{/each}}
   <li>
-    <a id="add-group">
+    <a id="add-team">
       <i class="icon-plus"></i>
-      Add a Group
+      Add a Team
     </a>
   </li>
 </ul>

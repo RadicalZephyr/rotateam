@@ -1,1 +1,1 @@
-Template.teamEdit.group = getCurrentGroup;
+Template.teamEdit.team = getCurrentTeam;
