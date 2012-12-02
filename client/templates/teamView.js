@@ -16,9 +16,7 @@ Template.teamView.events({
                               "type": "Member"});
         AddForm.show(function(err, value) {
             if (!err) {
-                Members.insert({"name": value,
-                                "userId": undefined,
-                                "team": Session.get("currentTeam")});
+                addMember({"name": value});
             }
         });
     }
