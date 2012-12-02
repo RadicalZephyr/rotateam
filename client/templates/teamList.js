@@ -14,13 +14,12 @@ Template.teamList.events({
                               "type": "Team"});
         AddForm.show(function(err, value) {
             if (!err && value !== undefined) {
-                addTeam({"name": value,
-                          "callback": function (err, result) {
-                              console.log("Insert callback, err: \""+err+"\", result: \""+result+"\"");
-                              if (!err)
-                                  Session.set("currentTeam", result);
-                          }
-                         });
+                addTeam({"name": value},
+                        function (err, result) {
+                            console.log("Insert callback, err: \""+err+"\", result: \""+result+"\"");
+                            if (!err)
+                                Session.set("currentTeam", result);
+                        });
             }
         });
     },
