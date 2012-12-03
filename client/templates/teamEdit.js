@@ -1,1 +1,1 @@
-Template.teamEdit.team = getCurrentTeam;
+Template.teamEdit.team = RotaTeam.getCurrentTeam;
